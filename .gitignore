@@ -1,0 +1,22 @@
+# 1. Betriebssystem (macOS)
+.DS_Store
+
+# 2. Python & Jupyter
+**/venv/
+**/.venv/
+**/__pycache__/
+**/.ipynb_checkpoints/
+*.pyc
+
+# 3. Editor (VS Code)
+.vscode/
+
+# 4. Geheimnisse
+.env
+*.key
+
+# 5. Logs & Sonstiges
+*.log
+
+
+
