@@ -6,21 +6,19 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # --- GLOBALE VARIABLEN ---
-# Wir speichern das trainierte "Gehirn" hier, damit die predict-Funktion darauf zugreifen kann.
 gmm = None
 final_clf = None
-tau = -np.inf # Startwert
+tau = -np.inf
 
 def train_my_logic():
     """
-    Hier steckt DEIN Code drin (Schritt 1 bis 3 aus deinem Notebook).
-    Diese Funktion wird einmal ganz am Anfang aufgerufen.
+    Modell Training
     """
     global gmm, final_clf, tau
     
-    print("--- Start Training (Group17 Logic) ---")
+    print("--- Start Training ---")
     
-    # 1. Daten laden (Pfade müssen stimmen!)
+    # 1. Daten laden
     try:
         df_train = pd.read_csv("D.csv")
         df_out_ref = pd.read_csv("D_out.csv")
@@ -45,8 +43,6 @@ def train_my_logic():
     tau = np.percentile(scores_out_ref, 99)
     print(f"Determined Threshold Tau: {tau:.4f}")
 
-    # (Optional: Plotting Code könnte hier stehen, lassen wir weg für reine Berechnungsspeed)
-
     print("--- Step 2: Cleaning Training Data ---")
     mask_clean = scores_train >= tau
     X_train_clean = X_train[mask_clean]
@@ -63,8 +59,7 @@ def train_my_logic():
 
 def predict(X_test):
     """
-    Diese Funktion wird vom Skeleton für jeden Datensatz (Leaderboard & Final) aufgerufen.
-    Sie ersetzt deine 'predict_pipeline'.
+    Leaderboard & Final prediction
     """
     global gmm, final_clf, tau
     
@@ -72,12 +67,11 @@ def predict(X_test):
     if gmm is None or final_clf is None:
         raise ValueError("Modelle nicht trainiert!")
 
-    # Features vorbereiten (ID wegwerfen)
+    # Features vorbereiten
     features = X_test.drop(columns=["id"], errors="ignore")
     
     # 1. Outlier Detection (GMM Logik)
     test_scores = gmm.score_samples(features)
-    # Dein Code: score < tau heißt Outlier (1), sonst Normal (0)
     outliers = (test_scores < tau).astype(int)
     
     # 2. Classification (Random Forest)
@@ -87,7 +81,6 @@ def predict(X_test):
 
 
 def generate_submission(test_data):
-    # DIESE FUNKTION NICHT ÄNDERN (Vom Skeleton vorgegeben)
     label_predictions, outlier_predictions = predict(test_data)
     
     submission_df = pd.DataFrame({ 
@@ -99,20 +92,15 @@ def generate_submission(test_data):
 
 
 def main():
-    # 1. ZUERST: Dein Training ausführen
     train_my_logic()
-    
-    # 2. Leaderboard Submission (Skeleton Logik)
     try:
         df_leaderboard = pd.read_csv("D_test_leaderboard.csv")
         submission_df = generate_submission(df_leaderboard)
-        # Group17 Name eingetragen
         submission_df.to_csv("submission_leaderboard_Group17.csv", index=False)
         print("Datei 'submission_leaderboard_Group17.csv' erstellt.")
     except FileNotFoundError:
         print("D_test_leaderboard.csv nicht gefunden, überspringe...")
 
-    # 3. Final Submission (Skeleton Logik)
     try:
         df_final = pd.read_csv("D_test_final.csv")
         submission_df = generate_submission(df_final)
