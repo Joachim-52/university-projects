@@ -1,0 +1,223 @@
+Welcome to the ticket booking system of the city of Graz
+----------------------------------------
+1. Create Account
+2. Log in to existing Account
+3. Exit
+----------------------------------------
+Enter your choice: Enter your user-name: Enter your password: Hello admin :D
+What do you want to do?
+----------------------------------------
+1. List available buslines
+2. Book a ticket
+3. Show bookings
+4. Add a busline
+5. Logout
+----------------------------------------
+Enter your choice: Enter busline-name: Enter origin stop: Enter destination stop: Enter busline-length: Enter busline-departure-time: Enter available tickets: Line 5 added!
+What do you want to do?
+----------------------------------------
+1. List available buslines
+2. Book a ticket
+3. Show bookings
+4. Add a busline
+5. Logout
+----------------------------------------
+Enter your choice: Bye bye!
+Welcome to the ticket booking system of the city of Graz
+----------------------------------------
+1. Create Account
+2. Log in to existing Account
+3. Exit
+----------------------------------------
+Enter your choice: Enter user-name: Choose a password: Account created successfully!
+Welcome to the ticket booking system of the city of Graz
+----------------------------------------
+1. Create Account
+2. Log in to existing Account
+3. Exit
+----------------------------------------
+Enter your choice: Enter your user-name: Enter your password: Invalid Username or Password
+Welcome to the ticket booking system of the city of Graz
+----------------------------------------
+1. Create Account
+2. Log in to existing Account
+3. Exit
+----------------------------------------
+Enter your choice: Enter your user-name: Enter your password: Hello Winnie :D
+What do you want to do?
+----------------------------------------
+1. List available buslines
+2. Book a ticket
+3. Show bookings
+4. Add a busline
+5. Logout
+----------------------------------------
+Enter your choice: What busline do you want to ride?
+----------------------------------------
+0. Go Back
+1. Line 1: Music Hall -> Harbour
+2. Line 2: Main Station -> Cemetary
+3. Line 3: City Center -> Main Square
+4. Line 4: University -> Shopping District
+5. Line 5: Park -> Museum
+----------------------------------------
+Enter your choice: Enter the amount of tickets: Booking for Line 1: Music Hall -> Harbour successful.
+What do you want to do?
+----------------------------------------
+1. List available buslines
+2. Book a ticket
+3. Show bookings
+4. Add a busline
+5. Logout
+----------------------------------------
+Enter your choice: What busline do you want to ride?
+----------------------------------------
+0. Go Back
+1. Line 1: Music Hall -> Harbour
+2. Line 2: Main Station -> Cemetary
+3. Line 3: City Center -> Main Square
+4. Line 4: University -> Shopping District
+5. Line 5: Park -> Museum
+----------------------------------------
+Enter your choice: Enter the amount of tickets: Booking for Line 5: Park -> Museum successful.
+What do you want to do?
+----------------------------------------
+1. List available buslines
+2. Book a ticket
+3. Show bookings
+4. Add a busline
+5. Logout
+----------------------------------------
+Enter your choice: You have booked tickets for:
+----------------------------------------
+Line 1: Music Hall -> Harbour (Amount of tickets: 1)
+Line 5: Park -> Museum (Amount of tickets: 100)
+----------------------------------------
+What do you want to do?
+----------------------------------------
+1. List available buslines
+2. Book a ticket
+3. Show bookings
+4. Add a busline
+5. Logout
+----------------------------------------
+Enter your choice: We are currently offering these buslines:
+----------------------------------------
+Line 1: Music Hall -> Harbour
+Line 2: Main Station -> Cemetary
+Line 3: City Center -> Main Square
+Line 4: University -> Shopping District
+Line 5: Park -> Museum
+----------------------------------------
+What do you want to do?
+----------------------------------------
+1. List available buslines
+2. Book a ticket
+3. Show bookings
+4. Add a busline
+5. Logout
+----------------------------------------
+Enter your choice: What busline do you want to ride?
+----------------------------------------
+0. Go Back
+1. Line 1: Music Hall -> Harbour
+2. Line 2: Main Station -> Cemetary
+3. Line 3: City Center -> Main Square
+4. Line 4: University -> Shopping District
+5. Line 5: Park -> Museum
+----------------------------------------
+Enter your choice: Enter the amount of tickets: There are not enough tickets available.
+What do you want to do?
+----------------------------------------
+1. List available buslines
+2. Book a ticket
+3. Show bookings
+4. Add a busline
+5. Logout
+----------------------------------------
+Enter your choice: What busline do you want to ride?
+----------------------------------------
+0. Go Back
+1. Line 1: Music Hall -> Harbour
+2. Line 2: Main Station -> Cemetary
+3. Line 3: City Center -> Main Square
+4. Line 4: University -> Shopping District
+5. Line 5: Park -> Museum
+----------------------------------------
+Enter your choice: Enter the amount of tickets: Booking for Line 5: Park -> Museum successful.
+What do you want to do?
+----------------------------------------
+1. List available buslines
+2. Book a ticket
+3. Show bookings
+4. Add a busline
+5. Logout
+----------------------------------------
+Enter your choice: You have booked tickets for:
+----------------------------------------
+Line 1: Music Hall -> Harbour (Amount of tickets: 1)
+Line 5: Park -> Museum (Amount of tickets: 120)
+----------------------------------------
+What do you want to do?
+----------------------------------------
+1. List available buslines
+2. Book a ticket
+3. Show bookings
+4. Add a busline
+5. Logout
+----------------------------------------
+Enter your choice: We are currently offering these buslines:
+----------------------------------------
+Line 1: Music Hall -> Harbour
+Line 2: Main Station -> Cemetary
+Line 3: City Center -> Main Square
+Line 4: University -> Shopping District
+----------------------------------------
+What do you want to do?
+----------------------------------------
+1. List available buslines
+2. Book a ticket
+3. Show bookings
+4. Add a busline
+5. Logout
+----------------------------------------
+Enter your choice: Bye bye!
+Welcome to the ticket booking system of the city of Graz
+----------------------------------------
+1. Create Account
+2. Log in to existing Account
+3. Exit
+----------------------------------------
+Enter your choice: Enter your user-name: Enter your password: Hello admin :D
+What do you want to do?
+----------------------------------------
+1. List available buslines
+2. Book a ticket
+3. Show bookings
+4. Add a busline
+5. Logout
+----------------------------------------
+Enter your choice: What busline do you want to ride?
+----------------------------------------
+0. Go Back
+1. Line 1: Music Hall -> Harbour
+2. Line 2: Main Station -> Cemetary
+3. Line 3: City Center -> Main Square
+4. Line 4: University -> Shopping District
+----------------------------------------
+Enter your choice: What do you want to do?
+----------------------------------------
+1. List available buslines
+2. Book a ticket
+3. Show bookings
+4. Add a busline
+5. Logout
+----------------------------------------
+Enter your choice: Bye bye!
+Welcome to the ticket booking system of the city of Graz
+----------------------------------------
+1. Create Account
+2. Log in to existing Account
+3. Exit
+----------------------------------------
+Enter your choice: Exiting...
