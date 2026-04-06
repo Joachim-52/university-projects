@@ -14,10 +14,10 @@ class TwoStateMachine(mdp.MDP):
         self._rewards = {
             (TwoStateMachine.States.upright,
              TwoStateMachine.Actions.walk,
-             TwoStateMachine.States.upright): 1,
+             TwoStateMachine.States.prone): 0,
             (TwoStateMachine.States.upright,
              TwoStateMachine.Actions.walk,
-             TwoStateMachine.States.prone): 0,
+             TwoStateMachine.States.upright): 10,
             (TwoStateMachine.States.prone,
              TwoStateMachine.Actions.stand,
              TwoStateMachine.States.upright): 0,
@@ -54,7 +54,11 @@ class TwoStateMachine(mdp.MDP):
 
     def successor_states(self, s, a):
         """Return all states reachable from s using action a."""
-        return {s2 for (s1, a1, s2) in self._rewards if s1 == s and a1 == a}
+        ss = []
+        for (s1, act, s2) in self._probs:
+            if s1 == s and act == a:
+                ss.append(s2)
+        return set(ss)
 
     def states(self):
         """Return all states in the system."""
@@ -92,18 +96,9 @@ if __name__ == "__main__":
     print("Computing tsm.analytic(0.5)")
     va = tsm.analytic(0.5)
     print("Value of state upright: {0}".format(va[TwoStateMachine.States.upright]))
-
-    # Analytic solution by hand:
-    # p11 = 0.8, r11 = 1, p12 = 0.2, gamma = 0.5
-    # v1 = p11 * r11 / (1 - p11*gamma - p12*gamma^2)
-    #    = 0.8 * 1 / (1 - 0.8*0.5 - 0.2*0.25)
-    #    = 0.8 / (1 - 0.4 - 0.05)
-    #    = 0.8 / 0.55
-    #    ≈ 1.4545
-    # v2 = gamma * v1 = 0.5 * 1.4545 ≈ 0.7273
-    gamma = 0.5
-    p11, r11, p12 = 0.8, 1, 0.2
-    v1_analytic = p11 * r11 / (1 - p11 * gamma - p12 * gamma ** 2)
-    v2_analytic = gamma * v1_analytic
-    print("Correct value (hand-computed): {0:.4f}".format(v1_analytic))
-    print("Match: {0}".format(abs(va[TwoStateMachine.States.upright] - v1_analytic) < 1e-10))
+    # Analytical derivation (gamma = 0.5):
+    # Bellman equations:
+    #   v(s1) = 0.8*(10 + 0.5*v(s1)) + 0.2*(0 + 0.5*v(s2))
+    #   v(s2) = 1.0*(0 + 0.5*v(s1))  =>  v(s2) = 0.5*v(s1)
+    # Substituting: 0.6*v(s1) - 0.05*v(s1) = 8  =>  v(s1) = 8/0.55 = 160/11
+    print("Correct value: v(upright) = 160/11 = {:.4f}, v(prone) = 80/11 = {:.4f}".format(160/11, 80/11))

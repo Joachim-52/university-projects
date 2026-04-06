@@ -21,19 +21,11 @@ class PolicyIteration:
 
         # self.r[s, a] = expected immediate reward in state s when taking action a
         self.r = np.zeros((self.num_states, self.num_actions))
-
-        # self.not_done_P[s', s, a] = P(s' | s, a) for non-terminal transitions only.
-        # Used in Bellman equations to correctly handle episodic MDPs (gamma=1.0):
-        # terminal state self-loops must not contribute future discounted value.
-        self.not_done_P = np.zeros((self.num_states, self.num_states, self.num_actions))
-
         for state in range(self.num_states):
             for action in range(self.num_actions):
                 for prob, next_state, reward, done in self.env.P[state][action]:
                     self.r[state, action] += prob * reward
                     self.P[next_state, state, action] += prob
-                    if not done:
-                        self.not_done_P[next_state, state, action] += prob
 
 
     def policy_evaluation(self, gamma=1., epsilon=1e-8):
@@ -45,20 +37,19 @@ class PolicyIteration:
         :return:
         """
 
-        # P_pi[s', s] = sum_a policy[s, a] * P(s' | s, a) for non-terminal transitions.
-        # Using not_done_P ensures terminal state self-loops don't prevent convergence
-        # when gamma=1.0 (spectral radius of P_pi would otherwise be exactly 1.0).
-        P_pi = np.einsum('ijk,jk->ij', self.not_done_P, self.policy)  # shape (s', s)
+        # P_pi[s', s] = sum_a policy[s, a] * P[s', s, a]
+        P_pi = np.einsum('sa,osa->os', self.policy, self.P)  # shape (num_states, num_states)
 
         # r_pi[s] = sum_a policy[s, a] * r[s, a]
-        r_pi = np.sum(self.policy * self.r, axis=1)  # shape (s,)
+        r_pi = np.sum(self.policy * self.r, axis=1)  # shape (num_states,)
 
         v = np.zeros(self.num_states)
         while True:
-            v_old = v.copy()
-            v = r_pi + gamma * (P_pi @ v)
-            if np.max(np.abs(v - v_old)) < epsilon:
+            v_new = r_pi + gamma * P_pi @ v
+            if np.max(np.abs(v_new - v)) < epsilon:
+                v = v_new
                 break
+            v = v_new
 
         return v
 
@@ -72,9 +63,8 @@ class PolicyIteration:
         :return: Q values where Q[s, a] corresponds to the Q-value of taking action a in state s
         """
 
-        # Q[s, a] = r[s, a] + gamma * sum_{s'} P[s' | s, a] * v[s']  (non-terminal only)
-        # einsum 'ijk,i->jk': sum over s' (i), leaving (s, a) = (j, k)
-        Q = self.r + gamma * np.einsum('ijk,i->jk', self.not_done_P, v)
+        # Q[s, a] = r[s, a] + gamma * sum_{s'} P[s', s, a] * v[s']
+        Q = self.r + gamma * np.einsum('osa,o->sa', self.P, v)
 
         assert Q.shape == (self.num_states, self.num_actions)
         return Q
@@ -95,10 +85,9 @@ class PolicyIteration:
             v = self.policy_evaluation(gamma)
             Q = self.compute_Q_from_v(v, gamma)
 
-            # Greedy policy: deterministically pick action with highest Q-value in each state
-            new_policy = np.zeros((self.num_states, self.num_actions))
-            new_policy[np.arange(self.num_states), np.argmax(Q, axis=1)] = 1.0
-            self.policy = new_policy
+            # Improve policy by acting greedily w.r.t. Q
+            self.policy = np.zeros((self.num_states, self.num_actions))
+            self.policy[np.arange(self.num_states), np.argmax(Q, axis=1)] = 1.0
 
             if np.array_equal(policy_old, self.policy):
                 break
