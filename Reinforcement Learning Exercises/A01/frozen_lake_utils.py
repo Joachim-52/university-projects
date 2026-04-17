@@ -148,3 +148,4 @@ def plot_frozenlake_results(algo_name, Q_table, env, gamma, test_reward, train_r
         plt.savefig(f'FrozenLake_{algo_name.replace(" ", "_")}_gamma_{gamma}.pdf')
     else:
         plt.show()
+    plt.close()
